@@ -1,13 +1,14 @@
-Name:    victoriametrics
-Version: 1.28.1
+Name:    teamcity
+Version: 2019.1.4
 Release: 1
 Summary: The best long-term remote storage for Prometheus
 
 Group:   Development Tools
 License: ASL 2.0
-URL: https://github.com/VictoriaMetrics/VictoriaMetrics/releases/download/v%{version}/victoria-metrics-v%{version}.tar.gz
+URL: https://github.com/teamcity/teamcity/releases/download/v%{version}/victoria-metrics-v%{version}.tar.gz
+URL: https://download-cf.jetbrains.com/teamcity/TeamCity-%{version}.tar.gz
 Source0: %{name}.service
-Source1: victoriametrics.conf
+Source1: teamcity.conf
 Requires(pre): /usr/sbin/useradd, /usr/bin/getent, /usr/bin/echo, /usr/bin/chown
 Requires(postun): /usr/sbin/userdel
 
@@ -15,11 +16,11 @@ Requires(postun): /usr/sbin/userdel
 %define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7) || (!0%{?is_opensuse} && 0%{?suse_version} >=1210) || (0%{?is_opensuse} && 0%{?sle_version} >= 120100)
 
 %description
-VictoriaMetrics - the best long-term remote storage for Prometheus
+teamcity - Powerful Continuous Integration and Continuous Delivery out of the box.
 
 %prep
-curl -L %{url} > victoria-metrics.tar.gz
-tar -zxf victoria-metrics.tar.gz
+curl -L %{url} > TeamCity.tar.gz
+tar -zxf TeamCity.tar.gz
 
 %install
 %{__install} -m 0755 -d %{buildroot}%{_bindir}
@@ -34,12 +35,12 @@ cp victoria-metrics-prod %{buildroot}%{_bindir}/victoria-metrics-prod
 %endif
 
 %pre
-/usr/bin/getent group victoriametrics > /dev/null || /usr/sbin/groupadd -r victoriametrics
-/usr/bin/getent passwd victoriametrics > /dev/null || /usr/sbin/useradd -r -d /var/lib/victoria-metrics-data -s /bin/bash -g victoriametrics victoriametrics
+/usr/bin/getent group teamcity > /dev/null || /usr/sbin/groupadd -r teamcity
+/usr/bin/getent passwd teamcity > /dev/null || /usr/sbin/useradd -r -d /var/lib/victoria-metrics-data -s /bin/bash -g teamcity teamcity
 %{__mkdir} /var/lib/victoria-metrics-data
-/usr/bin/echo "WARINING: chown -R victoriametrics:victoriametrics /var/lib/victoria-metrics-data"
+/usr/bin/echo "WARINING: chown -R teamcity:teamcity /var/lib/victoria-metrics-data"
 /usr/bin/echo "THIS MAY TAKE SOME TIME"
-/usr/bin/chown -R victoriametrics:victoriametrics /var/lib/victoria-metrics-data
+/usr/bin/chown -R teamcity:teamcity /var/lib/victoria-metrics-data
 
 %post
 %if %use_systemd
@@ -57,9 +58,9 @@ cp victoria-metrics-prod %{buildroot}%{_bindir}/victoria-metrics-prod
 %endif
 
 %files
-/etc/default/victoriametrics.conf
+/etc/default/teamcity.conf
 %{_bindir}/victoria-metrics-prod
-%dir %attr(0775, victoriametrics, victoriametrics) /var/lib/victoria-metrics-data
+%dir %attr(0775, teamcity, teamcity) /var/lib/victoria-metrics-data
 %if %{use_systemd}
 %{_unitdir}/%{name}.service
 %endif
