@@ -51,7 +51,8 @@ tar -xzf TeamCity.tar.gz -C %{buildroot}/var
 %endif
 
 %files
-%dir %attr(0775, teamcity, teamcity) /var/TeamCity
+%defattr (0775, teamcity, teamcity)
+%dir /var/TeamCity
 %if %{use_systemd}
 %{_unitdir}/%{name}.service
 %endif
