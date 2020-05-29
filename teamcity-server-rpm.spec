@@ -21,7 +21,7 @@ teamcity - Powerful Continuous Integration and Continuous Delivery out of the bo
 
 %prep
 pwd
-wget %{url} -O TeamCity.tar.gz
+wget --no-clobber  %{url} -O TeamCity.tar.gz
 
 %install
 %{__install} -m 0755 -d %{buildroot}/var
