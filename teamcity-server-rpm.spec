@@ -1,4 +1,5 @@
 %global __os_install_post %{nil}
+%_unpackaged_files_terminate_build 0
 
 Name:    teamcity
 Version: 2020.1
