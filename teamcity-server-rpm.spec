@@ -1,6 +1,6 @@
 %global __os_install_post %{nil}
-%_unpackaged_files_terminate_build      0
-%_binaries_in_noarch_packages_terminate_build   0
+%global _unpackaged_files_terminate_build      0
+%global _binaries_in_noarch_packages_terminate_build   0
 
 Name:    teamcity
 Version: 2020.1
