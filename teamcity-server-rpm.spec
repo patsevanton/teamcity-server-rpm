@@ -1,3 +1,5 @@
+%global __os_install_post %{nil}
+
 Name:    teamcity
 Version: 2020.1
 Release: 1
