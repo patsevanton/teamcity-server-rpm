@@ -15,6 +15,7 @@ Source0: teamcity-server.service
 Requires(pre): /usr/sbin/useradd, /usr/bin/getent, /usr/bin/echo, /usr/bin/chown
 Requires(postun): /usr/sbin/userdel
 BuildRequires: wget
+BuildRequires: java-1.8.0-openjdk
 BuildArch: noarch
 
 # Use systemd for fedora >= 18, rhel >=7, SUSE >= 12 SP1 and openSUSE >= 42.1
