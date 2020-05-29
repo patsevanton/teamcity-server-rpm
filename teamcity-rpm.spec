@@ -1,11 +1,10 @@
 Name:    teamcity
-Version: 2019.1.4
+Version: 2020.1
 Release: 1
 Summary: The best long-term remote storage for Prometheus
 
 Group:   Development Tools
 License: ASL 2.0
-URL: https://github.com/teamcity/teamcity/releases/download/v%{version}/victoria-metrics-v%{version}.tar.gz
 URL: https://download-cf.jetbrains.com/teamcity/TeamCity-%{version}.tar.gz
 Source0: %{name}.service
 Source1: teamcity.conf
