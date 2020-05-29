@@ -20,6 +20,7 @@ BuildRequires: wget
 teamcity - Powerful Continuous Integration and Continuous Delivery out of the box.
 
 %prep
+pwd
 wget %{url} -O TeamCity.tar.gz
 
 %install
