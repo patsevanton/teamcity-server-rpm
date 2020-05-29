@@ -9,6 +9,7 @@ Group:   Development Tools
 License: ASL 2.0
 URL: https://download-cf.jetbrains.com/teamcity/TeamCity-%{version}.tar.gz
 Source0: teamcity-server.service
+Source1: TeamCity.tar.gz
 Requires(pre): /usr/sbin/useradd, /usr/bin/getent, /usr/bin/echo, /usr/bin/chown
 Requires(postun): /usr/sbin/userdel
 BuildRequires: wget
@@ -19,12 +20,9 @@ BuildRequires: wget
 %description
 teamcity - Powerful Continuous Integration and Continuous Delivery out of the box.
 
-%prep
-wget %{url} -O TeamCity.tar.gz
-
 %install
 %{__install} -m 0755 -d %{buildroot}/var
-tar -xzf TeamCity.tar.gz -C %{buildroot}/var
+tar -xzf %{SOURCE1} -C %{buildroot}/var
 %if %{use_systemd}
 %{__mkdir} -p %{buildroot}%{_unitdir}
 %{__install} -m644 %{SOURCE0} \

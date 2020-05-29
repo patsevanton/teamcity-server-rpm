@@ -11,5 +11,6 @@ do
 done
 
 mkdir -p ./{RPMS,SRPMS,BUILD,SOURCES,SPECS}
+wget %{url} -O ./SOURCES/TeamCity.tar.gz
 cp teamcity-server.service ./SOURCES
 rpmbuild --quiet --define "_topdir `pwd`" -bb teamcity-server-rpm.spec
