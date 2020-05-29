@@ -18,10 +18,10 @@ teamcity - Powerful Continuous Integration and Continuous Delivery out of the bo
 
 %prep
 curl -L %{url} > TeamCity.tar.gz
-%{__install} -m 0755 -d %{buildroot}/var
-tar -xzf TeamCity.tar.gz -C %{buildroot}/var
 
 %install
+%{__install} -m 0755 -d %{buildroot}/var
+tar -xzf TeamCity.tar.gz -C %{buildroot}/var
 %if %{use_systemd}
 %{__mkdir} -p %{buildroot}%{_unitdir}
 %{__install} -m644 %{SOURCE0} \
