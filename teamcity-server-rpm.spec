@@ -4,9 +4,9 @@
 AutoReqProv: no
 
 Name:    teamcity
-Version: 2020.1
+Version: 2019.2
 Release: 1
-Summary: The best long-term remote storage for Prometheus
+Summary: TeamCity is a powerful and user-friendly Continuous Integration and Deployment server that works out of the box.
 
 Group:   Development Tools
 License: ASL 2.0
@@ -21,7 +21,8 @@ BuildArch: noarch
 %define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7) || (!0%{?is_opensuse} && 0%{?suse_version} >=1210) || (0%{?is_opensuse} && 0%{?sle_version} >= 120100)
 
 %description
-teamcity - Powerful Continuous Integration and Continuous Delivery out of the box.
+TeamCity is a powerful and user-friendly Continuous Integration and Deployment server that works out of the box.
+You can build, check and run automated tests on the server even before committing your changes – keeping your code base clean at all times.
 
 %prep
 wget  %{url} -O TeamCity.tar.gz
