@@ -6,8 +6,7 @@ Summary: The best long-term remote storage for Prometheus
 Group:   Development Tools
 License: ASL 2.0
 URL: https://download-cf.jetbrains.com/teamcity/TeamCity-%{version}.tar.gz
-Source0: %{name}.service
-Source1: teamcity.conf
+Source0: teamcity-server.service
 Requires(pre): /usr/sbin/useradd, /usr/bin/getent, /usr/bin/echo, /usr/bin/chown
 Requires(postun): /usr/sbin/userdel
 
@@ -19,14 +18,10 @@ teamcity - Powerful Continuous Integration and Continuous Delivery out of the bo
 
 %prep
 curl -L %{url} > TeamCity.tar.gz
-tar -zxf TeamCity.tar.gz
+%{__install} -m 0755 -d %{buildroot}/var
+tar -xzf TeamCity.tar.gz -C %{buildroot}/var
 
 %install
-%{__install} -m 0755 -d %{buildroot}%{_bindir}
-%{__install} -m 0755 -d %{buildroot}/etc/default/
-cp %{SOURCE1} %{buildroot}/etc/default/
-cp victoria-metrics-prod %{buildroot}%{_bindir}/victoria-metrics-prod
-%{__install} -m 0755 -d %{buildroot}/var/lib/victoria-metrics-data
 %if %{use_systemd}
 %{__mkdir} -p %{buildroot}%{_unitdir}
 %{__install} -m644 %{SOURCE0} \
@@ -35,11 +30,7 @@ cp victoria-metrics-prod %{buildroot}%{_bindir}/victoria-metrics-prod
 
 %pre
 /usr/bin/getent group teamcity > /dev/null || /usr/sbin/groupadd -r teamcity
-/usr/bin/getent passwd teamcity > /dev/null || /usr/sbin/useradd -r -d /var/lib/victoria-metrics-data -s /bin/bash -g teamcity teamcity
-%{__mkdir} /var/lib/victoria-metrics-data
-/usr/bin/echo "WARINING: chown -R teamcity:teamcity /var/lib/victoria-metrics-data"
-/usr/bin/echo "THIS MAY TAKE SOME TIME"
-/usr/bin/chown -R teamcity:teamcity /var/lib/victoria-metrics-data
+/usr/bin/getent passwd teamcity > /dev/null || /usr/sbin/useradd -r -d /var/TeamCity -s /bin/bash -g teamcity teamcity
 
 %post
 %if %use_systemd
@@ -57,9 +48,7 @@ cp victoria-metrics-prod %{buildroot}%{_bindir}/victoria-metrics-prod
 %endif
 
 %files
-/etc/default/teamcity.conf
-%{_bindir}/victoria-metrics-prod
-%dir %attr(0775, teamcity, teamcity) /var/lib/victoria-metrics-data
+%dir %attr(0775, teamcity, teamcity) /var/TeamCity
 %if %{use_systemd}
 %{_unitdir}/%{name}.service
 %endif

@@ -1,0 +1,17 @@
+[Unit]
+Description=JetBrains TeamCity Server
+Requires=network.target
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=teamcity
+Group=teamcity
+ExecStart=/var/TeamCity/bin/teamcity-server.sh run
+ExecStop=/var/TeamCity/bin/teamcity-server.sh stop
+LimitNOFILE=1048576
+LimitNPROC=1048576
+LimitCORE=infinity
+
+[Install]
+WantedBy=multi-user.target
