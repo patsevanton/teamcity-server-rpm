@@ -26,7 +26,7 @@ TeamCity is a powerful and user-friendly Continuous Integration and Deployment s
 You can build, check and run automated tests on the server even before committing your changes – keeping your code base clean at all times.
 
 %prep
-wget  %{url} -O TeamCity.tar.gz
+[ ! -x TeamCity.tar.gz ] && wget  %{url} -O TeamCity.tar.gz || :
 
 %install
 %{__install} -m 0755 -d %{buildroot}/var
